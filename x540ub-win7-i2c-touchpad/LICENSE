@@ -1,0 +1,33 @@
+MIT License
+
+Copyright (c) 2026 the contributors to this repository
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+This license covers the original content of this repository only: the
+Markdown documentation, the shell scripts in scripts/, the INF files in
+inf/ (text we authored ourselves — not the proprietary driver binaries they
+reference by filename, which are NOT included here), and the ASL/ACPI source
+in acpi/ (small excerpts and original fixes we wrote — not any full,
+copyrighted vendor firmware/BIOS source). It makes no claim over, and does
+not grant any rights to, any Microsoft, Intel, Synaptics, or ASUS proprietary
+software, driver, firmware, or documentation referenced by name, filename, or
+KB/version number anywhere in this repository.
