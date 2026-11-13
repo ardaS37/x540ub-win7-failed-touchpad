@@ -1,0 +1,67 @@
+;
+; iaHIDI2C.inf — minimal INF to bind Intel's "Serial IO Multi-touch Miniport
+; Driver" (iaHIDI2C.sys) to an ACPI HID-over-I2C touchpad device on
+; Windows 7 x64.
+;
+; THIS INF DOES NOT INCLUDE iaHIDI2C.sys. That file is Intel's proprietary
+; driver, part of various "Intel Serial IO" / OEM touch-digitizer driver
+; bundles for I2C-HID devices on Skylake/Kaby Lake platforms (we found it,
+; with its original INF already gone, on a test machine that had an earlier
+; unrelated attempt at this — check your OEM's support downloads, or any
+; machine's C:\Windows\System32\DriverStore\FileRepository\iahidi2c.inf_*\
+; for a legitimate copy + its original .inf/.cat). Sign it (see
+; ../docs/driver-signing.md) before installing with this INF.
+;
+; Replace ACPI\ELAN1200 below with your own touchpad's ACPI _HID (read it
+; from Device Manager -> Details tab -> Hardware Ids, or from your own
+; acpidump/iasl -d of \_SB.PCI0.I2C1's child touchpad device).
+;
+; Verified (see ../docs/attempted-drivers.md): this binary's import table has
+; zero unresolved symbols against a real Windows 7 SP1 x64 ntoskrnl.exe.
+; It loads cleanly. It still does not make the touchpad work on our test
+; unit — see ../docs/code12-resource-conflict.md.
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = HIDClass
+ClassGuid   = {745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider    = %Provider%
+DriverVer   = 01/01/2026,12.4.0.2
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[SourceDisksNames]
+1 = %DiskName%
+
+[SourceDisksFiles]
+iaHIDI2C.sys = 1
+
+[Manufacturer]
+%Provider% = Models, NTamd64
+
+[Models.NTamd64]
+%DeviceDesc% = IAHID_Inst, ACPI\ELAN1200
+
+[IAHID_Inst.NT]
+CopyFiles = IAHID_Files
+
+[IAHID_Files]
+iaHIDI2C.sys
+
+[IAHID_Inst.NT.Services]
+AddService = iaHIDI2C, 0x00000002, IAHID_Service
+
+[IAHID_Service]
+DisplayName   = %ServiceName%
+ServiceType   = 1               ; SERVICE_KERNEL_DRIVER
+StartType     = 3               ; SERVICE_DEMAND_START
+ErrorControl  = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary = %12%\iaHIDI2C.sys
+
+[Strings]
+Provider    = "Intel Corporation"
+DiskName    = "iaHIDI2C Setup"
+DeviceDesc  = "Intel(R) Serial IO Multi-touch Miniport Driver"
+ServiceName = "Intel(R) Serial IO Multi-touch Miniport Driver"
